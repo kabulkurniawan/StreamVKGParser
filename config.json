@@ -1,0 +1,74 @@
+	{
+  "title": "Host/Agent Log Parser server",
+  "ip-address": "localhost",
+  "port": 6660,
+    "logSources": [ 
+     {
+	      "title": "authlog",
+	      "type": "File",
+	      "logLocation": "experiment/logfile/auth/",
+	      "logMeta": "experiment/logmeta/auth_meta.ttl",
+	      "grokFile": "experiment/pattern/pattern.grok",
+	      "grokPattern": "%{SYSLOGBASE} %{GREEDYDATA:message}",
+		  "vocabulary":"https://w3id.org/sepses/vocab/log/auth#",
+	      "regexPattern": "experiment/pattern/regexPattern.ttl"
+		},
+      {
+	      "title": "apachelog",
+	      "type": "File",
+	      "logLocation": "experiment/logfile/apache/",
+	      "logMeta": "experiment/logmeta/apache_meta.ttl",
+	      "grokFile": "experiment/pattern/pattern.grok",
+	      "grokPattern": "%{COMMONAPACHELOG}",
+		  "vocabulary":"https://w3id.org/sepses/vocab/log/apache#",
+	       "regexPattern": "experiment/pattern/regexPattern.ttl"
+	      },
+	      {
+	      "title": "apacheErrorlog",
+	      "type": "File",
+	      "logLocation": "experiment/logfile/apache/error/",
+	      "logMeta": "experiment/logmeta/apache_error_meta.ttl",
+	      "grokFile": "experiment/pattern/pattern.grok",
+	      "grokPattern": "%{COMMONAPACHELOG}",
+		  "vocabulary":"https://w3id.org/sepses/vocab/log/apacheError#",
+	       "regexPattern": "experiment/pattern/regexPattern.ttl"
+     }, {
+	      "title": "auditlog",
+	      "type": "File",
+	      "logLocation": "experiment/logfile/audit/",
+	      "logMeta": "experiment/logmeta/audit_meta.ttl",
+	      "grokFile": "experiment/pattern/pattern.grok",
+	      "grokPattern": "%{AUDIT}",
+		  "regexPattern": "experiment/pattern/regexPattern.ttl",
+	      "vocabulary":"https://w3id.org/sepses/vocab/log/audit#"
+	 },{
+	      "title": "eximlog",
+	      "type": "File",
+	      "logLocation": "experiment/logfile/exim/",
+	      "logMeta": "experiment/logmeta/exim_meta.ttl",
+	      "grokFile": "experiment/pattern/pattern.grok",
+	      "grokPattern": "%{EXIM}",
+	      "regexPattern": "experiment/pattern/regexPattern.ttl",
+	      "vocabulary":"https://w3id.org/sepses/vocab/log/exim#"
+	 },{
+	      "title": "syslog",
+	      "type": "File",
+	      "logLocation": "experiment/logfile/sys/",
+	      "logMeta": "experiment/logmeta/sys_meta.ttl",
+	      "grokFile": "experiment/pattern/pattern.grok",
+	      "grokPattern": "%{SYS}",
+		  "regexPattern": "experiment/pattern/regexPattern.ttl",
+	      "vocabulary":"https://w3id.org/sepses/vocab/log/sys#"
+	  },{
+	      "title": "snortAlertlog",
+	      "type": "File",
+	      "logLocation": "experiment/logfile/snort/",
+	      "logMeta": "experiment/logmeta/snort_meta.ttl",
+	      "grokFile": "experiment/pattern/pattern.grok",
+	      "grokPattern": "%{SNORT}",
+		  "vocabulary":"https://w3id.org/sepses/vocab/log/snort-alert#",
+	       "regexPattern": "experiment/pattern/regexPattern.ttl"
+     }
+    ]
+
+  }
