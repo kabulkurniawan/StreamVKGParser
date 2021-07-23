@@ -196,7 +196,7 @@ public class StartService
 	}
 		public static void main( String[] args ) throws Exception
 		  {    
-				String parsedQueryFile = "experiment/example_query/query-audit.json";
+				String parsedQueryFile = "experiment/example_query/query-apache.json";
 				String parsedQuery = new String(Files.readAllBytes(Paths.get(parsedQueryFile))); 
 				 
 			    new StartService(parsedQuery);
