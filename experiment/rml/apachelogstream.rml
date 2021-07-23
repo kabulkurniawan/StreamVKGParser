@@ -1,0 +1,77 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rmls: <http://semweb.mmlab.be/ns/rmls#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ue: <http://w3id.org/sepses/vocab/unix-event#> .
+@prefix apache: <https://w3id.org/sepses/vocab/log/apache#> .
+@prefix cl: <https://w3id.org/sepses/vocab/log/core#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@base <http://example.com/base/> .
+
+<TriplesMap1> a rr:TriplesMap;
+
+  rml:logicalSource [
+    rml:source [
+        a rmls:TCPSocketStream ;
+        rmls:hostName "localhost" ;
+        rmls:port "9098"
+    ];
+    rml:referenceFormulation ql:JSONPath;
+  ];
+
+
+ rr:subjectMap [ rr:template "http://w3id.org/sepses/resource/apachelog#LogEntry-{id}"];
+ rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rr:template "https://w3id.org/sepses/vocab/log/apache#ApacheLogEntry"]];
+ rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:objectMap [ rr:template "http://dbpedia.org/page/Common_Log_Format"]];
+ rr:predicateObjectMap [ rr:predicate cl:timestamp;  rr:objectMap [ rr:template "{timestamp}";  rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasAgent; rr:objectMap [ rr:template "{agent}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasReferrer; rr:objectMap [rr:template "{referrer}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasRequestVerb; rr:objectMap [rr:template "{verb}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasHttpVersion; rr:objectMap [rr:template "{httpversion}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasClient; rr:objectMap [rr:template "{clientip}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasAuth; rr:objectMap [rr:template "{auth}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasIdent; rr:objectMap [rr:template "{ident}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasResourceSize; rr:objectMap [rr:template "{bytes}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasResponse; rr:objectMap [rr:template "{response}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasRequest; rr:objectMap [rr:template "{request}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasRawRequest; rr:objectMap [rr:template "{rawrequest}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate cl:message; rr:objectMap [rr:template "{message}"; rr:datatype xsd:string;]];
+.
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rmls: <http://semweb.mmlab.be/ns/rmls#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix apache: <https://w3id.org/sepses/vocab/log/apache#> .
+@prefix cl: <https://w3id.org/sepses/vocab/log/core#> .
+@base <http://example.com/base/> .
+
+<TriplesMap1> a rr:TriplesMap;
+
+  rml:logicalSource [
+    rml:source [
+        a rmls:TCPSocketStream ;
+        rmls:hostName "localhost" ;
+        rmls:port "6660"
+    ];
+    rml:referenceFormulation ql:JSONPath;
+  ];
+
+ rr:subjectMap [ rr:template "http://w3id.org/sepses/resource/apachelog#LogEntry-{id}"];
+ rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rr:template "https://w3id.org/sepses/vocab/log/apache#ApacheLogEntry"]];
+ rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:objectMap [ rr:template "http://dbpedia.org/page/Common_Log_Format"]];
+ rr:predicateObjectMap [ rr:predicate cl:timestamp;  rr:objectMap [ rr:template "{timestamp}";  rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasAgent; rr:objectMap [ rr:template "{agent}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasReferrer; rr:objectMap [rr:template "{referrer}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasRequestVerb; rr:objectMap [rr:template "{verb}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasHttpVersion; rr:objectMap [rr:template "{httpversion}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasClient; rr:objectMap [rr:template "{clientip}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasAuth; rr:objectMap [rr:template "{auth}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasIdent; rr:objectMap [rr:template "{ident}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasResourceSize; rr:objectMap [rr:template "{bytes}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasResponse; rr:objectMap [rr:template "{response}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasRequest; rr:objectMap [rr:template "{request}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate apache:hasRawRequest; rr:objectMap [rr:template "{rawrequest}"; rr:datatype xsd:string;]];
+ rr:predicateObjectMap [ rr:predicate cl:message; rr:objectMap [rr:template "{message}"; rr:datatype xsd:string;]];
+.

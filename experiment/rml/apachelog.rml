@@ -5,6 +5,7 @@
 @prefix ue: <http://w3id.org/sepses/vocab/unix-event#>.
 @prefix apache: <https://w3id.org/sepses/vocab/log/apache#>.
 @prefix cl: <https://w3id.org/sepses/vocab/log/core#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://epfl.ch/mapping/>.
 
 <#SubjectMapping> a rr:TriplesMap ;
