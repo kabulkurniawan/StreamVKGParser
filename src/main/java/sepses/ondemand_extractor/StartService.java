@@ -126,7 +126,11 @@ public class StartService
 								 jsondata=jsondataTemp;
 		    				 }
 		    				
-		    				out.println(jsondata);
+		    				if(jsondata!=null){
+		    					JsonNode jsondataUUID = addUUID(jsondata);
+		    					out.println(jsondataUUID);
+		    				}
+		    				
 		    				
 		    			  } 
 	    
