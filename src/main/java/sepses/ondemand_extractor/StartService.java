@@ -54,6 +54,9 @@ public class StartService
 	            System.out.println("New client connected");
 		        out = new PrintWriter(clientSocket.getOutputStream(), true);
 		        
+		  //submit job on flink
+		        Runtime rt = Runtime.getRuntime();
+		        Process pr = rt.exec("java -jar map.jar time.rel test.txt debug");
 	            
 	     //logsources
 			

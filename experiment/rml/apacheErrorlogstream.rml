@@ -1,24 +1,29 @@
-@prefix rr: <http://www.w3.org/ns/r2rml#>.
-@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rmls: <http://semweb.mmlab.be/ns/rmls#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix carml: <http://carml.taxonic.com/carml/> .
-@prefix ue: <http://w3id.org/sepses/vocab/unix-event#>.
-@prefix ape: <https://w3id.org/sepses/vocab/log/apacheError#>.
-@prefix cl: <https://w3id.org/sepses/vocab/log/core#>.
-@prefix : <http://epfl.ch/mapping/>.
+@prefix ue: <http://w3id.org/sepses/vocab/unix-event#> .
+@prefix ape: <https://w3id.org/sepses/vocab/log/apacheError#> .
+@prefix cl: <https://w3id.org/sepses/vocab/log/core#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@base <http://example.com/base/> .
 
-<#SubjectMapping> a rr:TriplesMap ;
+<TriplesMap1> a rr:TriplesMap;
+
   rml:logicalSource [
     rml:source [
-      a carml:Stream ;
-    ] ;
-    rml:referenceFormulation ql:JSONPath ;
-    rml:iterator "$.logEntry.[*]" ;
-  ] ;
+        a rmls:TCPSocketStream ;
+        rmls:hostName "localhost" ;
+        rmls:port "6660"
+    ];
+    rml:referenceFormulation ql:JSONPath;
+  ];
+
 
  rr:subjectMap [ rr:template "http://w3id.org/sepses/resource/apacheErrorLog#LogEntry-{id}"];
- rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rr:template "https://w3id.org/sepses/vocab/log/apache#ApacheErrorLogEntry"]];
- rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:objectMap [ rr:template "http://dbpedia.org/page/Common_Log_Format"]];
+ rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rml:reference "https://w3id.org/sepses/vocab/log/apache#ApacheErrorLogEntry"]];
+ rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:objectMap [ rml:reference "http://dbpedia.org/page/Common_Log_Format"]];
  rr:predicateObjectMap [ rr:predicate cl:timestamp;  rr:objectMap [ rr:template "{timestamp}";  rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate ape:logLevel; rr:objectMap [ rr:template "{loglevel}"; rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate ape:clientIp; rr:objectMap [ rr:template "{clientip}"; rr:datatype xsd:string;]];
