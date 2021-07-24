@@ -44,25 +44,24 @@ public class StartService
 		String JsonConfig = new String(Files.readAllBytes(Paths.get("config.json"))); 
 		JSONParser jcparser = new JSONParser(); 
 		JSONObject jcobject = (JSONObject) jcparser.parse(JsonConfig);
-		long port = JsonPath.read(jcobject, "$.port");
+		long sourceport = JsonPath.read(jcobject, "$.source-port");
+		long targetport = JsonPath.read(jcobject, "$.target-port");
+		String targetip = JsonPath.read(jcobject, "$.target-ip");
+		String flinkloc = JsonPath.read(jcobject, "$.flink-loc");
+		String rmlstreamerloc = JsonPath.read(jcobject, "$.RMLStreamer-loc");
+	
 		
-		//run Tcp Server first
 		  try {
-			    serverSocket = new ServerSocket((int) port);
-	            System.out.println("Listening at port: " + port);
-	            clientSocket = serverSocket.accept();
-	            System.out.println("New client connected");
-		        out = new PrintWriter(clientSocket.getOutputStream(), true);
-		        
-		  //submit job on flink
-		        Runtime rt = Runtime.getRuntime();
-		        Process pr = rt.exec("java -jar map.jar time.rel test.txt debug");
+			  
+		
+	
 	            
 	     //logsources
 			
 	        List<String> logSources = JsonPath.read(jcobject, "$.logSources");
 	        List<String> llogLocation = JsonPath.read(jcobject,"$.logSources[*].logLocation");
 	        List<String> llogMeta = JsonPath.read(jcobject,"$.logSources[*].logMeta");
+	        List<String> rmlMapper = JsonPath.read(jcobject,"$.logSources[*].rmlMapper");
 	        List<String> lgrokFile = JsonPath.read(jcobject,"$.logSources[*].grokFile");
 	        List<String> lgrokPattern = JsonPath.read(jcobject,"$.logSources[*].grokPattern");
 	        List<String> lregexPattern = JsonPath.read(jcobject,"$.logSources[*].regexPattern");
@@ -71,12 +70,25 @@ public class StartService
 	        ArrayList<String> prefixes = QueryTranslator2.parsePrefixes(pq);
 			
 	   		for(int i=0;i<logSources.size();i++) {
-	   				
+	   		  //submit job on flink
+		        String jobcommand= flinkloc+" run "+rmlstreamerloc+" toTCPSocket -s "+targetip+":"+targetport+" -m "+rmlMapper.get(i);
+		        System.out.print(jobcommand);
+		        Runtime rt = Runtime.getRuntime();
+		        rt.exec(jobcommand);
+		        System.exit(0);
+		        
+		        //run Tcp Server first      
+		        serverSocket = new ServerSocket((int) sourceport);
+		        System.out.println("Listening at port: " + sourceport);
+		        clientSocket = serverSocket.accept();
+		        System.out.println("New client connected");
+		        out = new PrintWriter(clientSocket.getOutputStream(), true);
 	   		
 	   			if(prefixes.contains(lvocabulary.get(i).toString())){
-
-	   				log.info("parsing start");
-	   				
+	   		   
+	   			        
+	   			  //start parsing	
+	   			    log.info("parsing start");
 	   				parse(llogLocation.get(i), llogMeta.get(i),lgrokFile.get(i), lgrokPattern.get(i),
 	   								pq, lregexPattern.get(i), lvocabulary.get(i),out);	
 	   			}
