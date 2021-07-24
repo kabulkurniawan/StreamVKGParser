@@ -4,8 +4,8 @@
   "source-port": 6660,
   "target-ip":"localhost",
   "target-port": 7770,
-  "flink-loc": "flink/target/",
-  "RMLStreamer-loc":"RMLStreamer/target/",
+  "flink-dir": "flink/",
+  "RMLStreamer-dir":"RMLStreamer/",
   "logSources": [ 
      {
 	      "title": "authlog",
