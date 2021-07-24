@@ -53,40 +53,39 @@ public class StartService
 		
 		  try {
 			  
-		
-	
 	            
 	     //logsources
 			
-	        List<String> logSources = JsonPath.read(jcobject, "$.logSources");
-	        List<String> llogLocation = JsonPath.read(jcobject,"$.logSources[*].logLocation");
-	        List<String> llogMeta = JsonPath.read(jcobject,"$.logSources[*].logMeta");
-	        List<String> rmlMapper = JsonPath.read(jcobject,"$.logSources[*].rmlMapper");
-	        List<String> lgrokFile = JsonPath.read(jcobject,"$.logSources[*].grokFile");
-	        List<String> lgrokPattern = JsonPath.read(jcobject,"$.logSources[*].grokPattern");
-	        List<String> lregexPattern = JsonPath.read(jcobject,"$.logSources[*].regexPattern");
-	        List<String> lvocabulary = JsonPath.read(jcobject,"$.logSources[*].vocabulary");
-	   	 
-	        ArrayList<String> prefixes = QueryTranslator2.parsePrefixes(pq);
-			
-	   		for(int i=0;i<logSources.size();i++) {
-	   		  //submit job on flink
-		        String jobcommand= flinkloc+" run "+rmlstreamerloc+" toTCPSocket -s "+targetip+":"+targetport+" -m "+rmlMapper.get(i);
-		        System.out.print(jobcommand);
-		        Runtime rt = Runtime.getRuntime();
-		        rt.exec(jobcommand);
-		        System.exit(0);
-		        
-		        //run Tcp Server first      
-		        serverSocket = new ServerSocket((int) sourceport);
-		        System.out.println("Listening at port: " + sourceport);
-		        clientSocket = serverSocket.accept();
-		        System.out.println("New client connected");
-		        out = new PrintWriter(clientSocket.getOutputStream(), true);
-	   		
-	   			if(prefixes.contains(lvocabulary.get(i).toString())){
+		        List<String> logSources = JsonPath.read(jcobject, "$.logSources");
+		        List<String> logtitle = JsonPath.read(jcobject,"$.logSources[*].title");
+		        List<String> llogLocation = JsonPath.read(jcobject,"$.logSources[*].logLocation");
+				List<String> llogMeta = JsonPath.read(jcobject,"$.logSources[*].logMeta");
+		        List<String> rmlMapper = JsonPath.read(jcobject,"$.logSources[*].rmlMapper");
+		        List<String> lgrokFile = JsonPath.read(jcobject,"$.logSources[*].grokFile");
+		        List<String> lgrokPattern = JsonPath.read(jcobject,"$.logSources[*].grokPattern");
+		        List<String> lregexPattern = JsonPath.read(jcobject,"$.logSources[*].regexPattern");
+		        List<String> lvocabulary = JsonPath.read(jcobject,"$.logSources[*].vocabulary");
+		   	 
+		        ArrayList<String> prefixes = QueryTranslator2.parsePrefixes(pq);
+				
+		   		for(int i=0;i<logSources.size();i++) {
+		   		
+		   			if(prefixes.contains(lvocabulary.get(i).toString())){
+						
+		   				System.out.println("processing log: "+logtitle.get(i));
+						//submit job on flink
+						String jobcommand= flinkloc+" run "+rmlstreamerloc+" toTCPSocket -s "+targetip+":"+targetport+" -m "+rmlMapper.get(i);
+						//   System.out.print(jobcommand);
+						Runtime rt = Runtime.getRuntime();
+						rt.exec(jobcommand);
+
+						//run Tcp Server first
+						serverSocket = new ServerSocket((int) sourceport);
+						System.out.println("Listening at port: " + sourceport);
+						clientSocket = serverSocket.accept();
+						System.out.println("New client connected");
+						out = new PrintWriter(clientSocket.getOutputStream(), true);
 	   		   
-	   			        
 	   			  //start parsing	
 	   			    log.info("parsing start");
 	   				parse(llogLocation.get(i), llogMeta.get(i),lgrokFile.get(i), lgrokPattern.get(i),
