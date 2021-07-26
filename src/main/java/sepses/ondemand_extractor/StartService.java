@@ -4,7 +4,6 @@ import sepses.parser.GrokHelper;
 
 import java.util.UUID;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -50,12 +50,8 @@ public class StartService
 		String rmlstreamerloc = JsonPath.read(jcobject, "$.RMLStreamer-loc");
 		String sparqljsloc = JsonPath.read(jcobject, "$.SPARQLJS-loc");
 			
-		String pq = parseSPARQL(sparqljsloc, sparqljsloc);
-		System.out.print(pq);
-		System.exit(0);
 		
-		  try {
-			  
+		  try {  
 	            
 	     //logsources
 			
@@ -69,6 +65,7 @@ public class StartService
 		        List<String> lregexPattern = JsonPath.read(jcobject,"$.logSources[*].regexPattern");
 		        List<String> lvocabulary = JsonPath.read(jcobject,"$.logSources[*].vocabulary");
 		   	 
+		        String pq = parseSPARQL(sparqljsloc, sparql);
 		        ArrayList<String> prefixes = QueryTranslator2.parsePrefixes(pq);
 				
 		   		for(int i=0;i<logSources.size();i++) {
@@ -227,21 +224,22 @@ public class StartService
 		public static String parseSPARQL(String sparqljsloc, String sparql) throws IOException {
 		//create SPARQL file
 				String sparqlfile="query.sparql";
-				Writer writer = null;
+				
 				try {
-					writer = new BufferedWriter(new OutputStreamWriter(
-					          new FileOutputStream(sparqlfile), "utf-8"));
-					writer.write(sparql);
+					FileOutputStream outputStream = new FileOutputStream(sparqlfile);
+				    byte[] strToBytes = sparql.getBytes();
+				    outputStream.write(strToBytes);
+
+				    outputStream.close();
 				 } catch (Exception e) {
 			            e.printStackTrace();
 			        }
 				    
-				   
-				//parse SPARQL Query to SPARQL json
+				
 				String jobcommand= sparqljsloc+" "+sparqlfile;
 				Runtime rt = Runtime.getRuntime();
 				Process proc = rt.exec(jobcommand);
-				String pq = proc.getInputStream().toString();
+				String pq = IOUtils.toString(proc.getInputStream(), "utf8");
 				return pq;
 		}
 }
