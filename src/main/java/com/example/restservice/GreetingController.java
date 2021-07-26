@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class GreetingController {
 
 	@GetMapping("/startservice")
-	public StartService startservice(@RequestParam(name = "parsedQuery") String parsedQuery) throws Exception {
-		return new StartService	(parsedQuery);
+	public StartService startservice(@RequestParam(name = "query") String query) throws Exception {
+		return new StartService	(query);
 	}
 	
 	
