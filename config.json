@@ -6,6 +6,7 @@
   "target-port": 7770,
   "flink-loc": "flink/bin/flink",
   "RMLStreamer-loc":"RMLStreamer/RMLStreamer-2.1.2.jar",
+  "SPARQLJS-loc":"SPARQL.js/bin/sparql-to-json",
   "logSources": [ 
      {
 	      "title": "authlog",

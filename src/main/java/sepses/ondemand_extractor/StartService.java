@@ -1,11 +1,10 @@
 package sepses.ondemand_extractor;
 
 import sepses.parser.GrokHelper;
-import java.io.BufferedReader;
+
 import java.util.UUID;
-import java.io.File;
-import java.io.FileReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,7 @@ public class StartService
 	private Socket clientSocket;
 	private PrintWriter out;
 
-	public StartService(String pq) throws Exception {
+	public StartService(String sparql) throws Exception {
 		
 		String JsonConfig = new String(Files.readAllBytes(Paths.get("config.json"))); 
 		JSONParser jcparser = new JSONParser(); 
@@ -49,7 +48,11 @@ public class StartService
 		String targetip = JsonPath.read(jcobject, "$.target-ip");
 		String flinkloc = JsonPath.read(jcobject, "$.flink-loc");
 		String rmlstreamerloc = JsonPath.read(jcobject, "$.RMLStreamer-loc");
-	
+		String sparqljsloc = JsonPath.read(jcobject, "$.SPARQLJS-loc");
+			
+		String pq = parseSPARQL(sparqljsloc, sparqljsloc);
+		System.out.print(pq);
+		System.exit(0);
 		
 		  try {
 			  
@@ -214,11 +217,31 @@ public class StartService
 	}
 		public static void main( String[] args ) throws Exception
 		  {    
-				String parsedQueryFile = "experiment/example_query/query-apache.json";
+				String parsedQueryFile = "experiment/example_query/query-apache.sparql";
 				String parsedQuery = new String(Files.readAllBytes(Paths.get(parsedQueryFile))); 
 				 
 			    new StartService(parsedQuery);
 				
 		 	}
-	
+		
+		public static String parseSPARQL(String sparqljsloc, String sparql) throws IOException {
+		//create SPARQL file
+				String sparqlfile="query.sparql";
+				Writer writer = null;
+				try {
+					writer = new BufferedWriter(new OutputStreamWriter(
+					          new FileOutputStream(sparqlfile), "utf-8"));
+					writer.write(sparql);
+				 } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+				    
+				   
+				//parse SPARQL Query to SPARQL json
+				String jobcommand= sparqljsloc+" "+sparqlfile;
+				Runtime rt = Runtime.getRuntime();
+				Process proc = rt.exec(jobcommand);
+				String pq = proc.getInputStream().toString();
+				return pq;
+		}
 }
