@@ -4,5 +4,5 @@
 /.vscode
 /gradle
 /RMLStreamer
-/flink-1.13.1
+/flink-1.12.3
 /.idea
