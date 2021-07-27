@@ -21,8 +21,8 @@
   ];
 
  rr:subjectMap [ rr:template "http://w3id.org/sepses/resource/snortAlertlog#LogEntry-{id}"];
- rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rml:reference "https://w3id.org/sepses/vocab/log/snort-alert#IDSSnortAlertLogEntry"]];
- rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:objectMap [ rml:reference "http://dbpedia.org/resource/snort"]];
+ rr:predicateObjectMap [ rr:predicate rdf:type; rr:object <https://w3id.org/sepses/vocab/log/snort-alert#IDSSnortAlertLogEntry>];
+ rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:object <http://dbpedia.org/resource/snort> ];
  rr:predicateObjectMap [ rr:predicate cl:timestamp;  rr:objectMap [ rr:template "{month}/{day}-{time}";  rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate sa:classification; rr:objectMap [ rr:template "{classification}"; rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate sa:priority; rr:objectMap [rr:template "{priority}"; rr:datatype xsd:integer;]];
