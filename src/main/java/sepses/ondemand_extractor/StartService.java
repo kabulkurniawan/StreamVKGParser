@@ -65,6 +65,7 @@ public class StartService
 		        List<String> lregexPattern = JsonPath.read(jcobject,"$.logSources[*].regexPattern");
 		        List<String> lvocabulary = JsonPath.read(jcobject,"$.logSources[*].vocabulary");
 		   	 
+		        log.info("parse CSPARQL query into json object..");
 		        String pq = parseSPARQL(sparqljsloc, sparql);
 		        ArrayList<String> prefixes = QueryTranslator2.parsePrefixes(pq);
 				
@@ -72,7 +73,8 @@ public class StartService
 		   		
 		   			if(prefixes.contains(lvocabulary.get(i).toString())){
 						
-		   				System.out.println("processing log: "+logtitle.get(i));
+		   				log.info("processing log: "+logtitle.get(i));
+		   				log.info("submitting flink job with RML file:"+rmlMapper.get(i));
 						//submit job on flink
 						String jobcommand= flinkloc+" run "+rmlstreamerloc+" toTCPSocket -s "+targetip+":"+targetport+" -m "+rmlMapper.get(i);
 						//   System.out.print(jobcommand);
@@ -81,9 +83,9 @@ public class StartService
 
 						//run Tcp Server first
 						serverSocket = new ServerSocket((int) sourceport);
-						System.out.println("Listening at port: " + sourceport);
+						log.info("Listening at port: " + sourceport);
 						clientSocket = serverSocket.accept();
-						System.out.println("New client connected");
+						log.info("New client connected");
 						out = new PrintWriter(clientSocket.getOutputStream(), true);
 	   		   
 	   			  //start parsing	
