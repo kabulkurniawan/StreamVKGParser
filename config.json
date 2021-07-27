@@ -5,7 +5,7 @@
   "target-ip":"localhost",
   "target-port": 7770,
   "flink-loc": "flink/bin/flink",
-  "RMLStreamer-loc":"RMLStreamer/RMLStreamer-2.1.2.jar",
+  "RMLStreamer-loc":"RMLStreamer/target/RMLStreamer-2.1.2-SNAPSHOT.jar",
   "SPARQLJS-loc":"SPARQL.js/bin/sparql-to-json",
   "logSources": [ 
      {
