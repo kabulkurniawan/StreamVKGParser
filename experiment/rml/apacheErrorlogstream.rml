@@ -22,8 +22,8 @@
 
 
  rr:subjectMap [ rr:template "http://w3id.org/sepses/resource/apacheErrorLog#LogEntry-{id}"];
- rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rml:reference "https://w3id.org/sepses/vocab/log/apache#ApacheErrorLogEntry"]];
- rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:objectMap [ rml:reference "http://dbpedia.org/page/Common_Log_Format"]];
+ rr:predicateObjectMap [ rr:predicate rdf:type; rr:object <https://w3id.org/sepses/vocab/log/apache#ApacheErrorLogEntry>];
+ rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:object <http://dbpedia.org/page/Common_Log_Format>];
  rr:predicateObjectMap [ rr:predicate cl:timestamp;  rr:objectMap [ rr:template "{timestamp}";  rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate ape:logLevel; rr:objectMap [ rr:template "{loglevel}"; rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate ape:clientIp; rr:objectMap [ rr:template "{clientip}"; rr:datatype xsd:string;]];

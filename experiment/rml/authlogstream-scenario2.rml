@@ -22,8 +22,8 @@
 
 
  rr:subjectMap [ rr:template "http://w3id.org/sepses/resource/authlog#LogEntry-{id}"];
- rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rml:reference "https://w3id.org/sepses/vocab/log/authLog#AuthLogEntry"]];
- rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:objectMap [ rml:reference "http://dbpedia.org/resource/Syslog"]];
+ rr:predicateObjectMap [ rr:predicate rdf:type; rr:object <https://w3id.org/sepses/vocab/log/authLog#AuthLogEntry> ];
+ rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:object <http://dbpedia.org/resource/Syslog> ];
  rr:predicateObjectMap [ rr:predicate cl:timestamp;  rr:objectMap [ rr:template "{timestamp}";  rr:datatype xsd:dateTime;]];
  rr:predicateObjectMap [ rr:predicate auth:pid; rr:objectMap [ rr:template "{pid}"; rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate auth:hasProgram; rr:objectMap [rr:template "http://w3id.org/sepses/resource/system#prog-{program}"; rr:datatype xsd:string;]];

@@ -22,7 +22,7 @@
 
 
  rr:subjectMap [ rr:template "http://w3id.org/sepses/resource/authlog#LogEntry-{id}"];
- rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rml:reference "https://w3id.org/sepses/vocab/log/authLog#AuthLogEntry"]];
+ rr:predicateObjectMap [ rr:predicate rdf:type; rr:object<https://w3id.org/sepses/vocab/log/authLog#AuthLogEntry>];
  rr:predicateObjectMap [ rr:predicate cl:timestamp;  rr:objectMap [ rr:template "{timestamp}";  rr:datatype xsd:dateTime;]];
  rr:predicateObjectMap [ rr:predicate auth:programName; rr:objectMap [rr:template "{program}"; rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate cl:message; rr:objectMap [rr:template "{message}"; rr:datatype xsd:string;]].

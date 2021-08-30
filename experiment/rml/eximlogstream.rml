@@ -22,8 +22,8 @@
 
 
  rr:subjectMap [ rr:template "http://w3id.org/sepses/resource/eximlog#LogEntry-{id}"];
- rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rml:reference "https://w3id.org/sepses/vocab/log/eximlog#eximLogEntry"]];
- rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:objectMap [ rml:reference "http://dbpedia.org/resource/Exim"]];
+ rr:predicateObjectMap [ rr:predicate rdf:type; rr:object <https://w3id.org/sepses/vocab/log/eximlog#eximLogEntry> ];
+ rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:object <http://dbpedia.org/resource/Exim> ];
  rr:predicateObjectMap [ rr:predicate exim:flags;  rr:objectMap [ rr:template "{exim_flags}";  rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate cl:timestamp;  rr:objectMap [ rr:template "{exim_date}";  rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate exim:pid; rr:objectMap [ rr:template "{exim_pid}"; rr:datatype xsd:string;]];

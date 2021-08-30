@@ -22,8 +22,8 @@
 
 
  rr:subjectMap [ rr:template "http://w3id.org/sepses/resource/auditlog#LogEntry-{id}"];
- rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rml:reference "https://w3id.org/sepses/vocab/log/audit#AuditLogEntry"]];
- rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:objectMap [ rml:reference "http://dbpedia.org/page/Audit_trail"]];
+ rr:predicateObjectMap [ rr:predicate rdf:type; rr:object <https://w3id.org/sepses/vocab/log/audit#AuditLogEntry>];
+ rr:predicateObjectMap [ rr:predicate cl:hasLogFamily; rr:object <http://dbpedia.org/page/Audit_trail>];
  rr:predicateObjectMap [ rr:predicate cl:timestamp;  rr:objectMap [ rr:template "{audit_epoch}";  rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate audit:type; rr:objectMap [ rr:template "{audit_type}"; rr:datatype xsd:string;]];
  rr:predicateObjectMap [ rr:predicate audit:exe; rr:objectMap [rr:template "{audit_exe}"; rr:datatype xsd:string;]];
