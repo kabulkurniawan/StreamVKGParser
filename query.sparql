@@ -1,6 +1,15 @@
-PREFIX cl: <https://w3id.org/sepses/vocab/log/core#>
-PREFIX apache: <https://w3id.org/sepses/vocab/log/apache#>
-SELECT ?s ?timestamp WHERE {
- ?s   cl:timestamp   ?timestamp.
-	}			
-	LIMIT 5000
+PREFIX  dbo:  <http://dbpedia.org/ontology/>
+PREFIX  cl:   <https://w3id.org/sepses/vocab/log/core#>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  auth: <https://w3id.org/sepses/vocab/log/auth#>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?pn ?lf ?labl
+WHERE
+  { ?lf  rdfs:label  ?labl
+    GRAPH ?w
+      { ?s  auth:programName  ?pn ;
+            cl:hasLogFamily   ?lf
+        FILTER regex(str(?pn), "auth")
+      }
+  }
